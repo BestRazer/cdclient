@@ -5,8 +5,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const UA = 'okhttp/4.9.3';
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 // helper: POST JSON
 async function postJSON(url, body, extraHeaders = {}) {
   const res = await fetch(url, {
@@ -209,6 +207,8 @@ app.get('/connections', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () =>
 console.log(`Server running at http://localhost:${PORT}/connections`)
